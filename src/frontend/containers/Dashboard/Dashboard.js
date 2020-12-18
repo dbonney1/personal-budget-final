@@ -550,19 +550,6 @@ const Dashboard = () => {
     setCharts(newCharts);
   };
 
-  // if user not logged in, return an appropriate message
-  const token = localStorage.getItem("token");
-  if (!token) {
-    return (
-      <div>
-        <NavItems />
-        <Hero />
-        <h2 className={classes.Heading}>Dashboard</h2>
-        <h3 className={classes.Message}>Sorry, you must be logged in to access the dashboard!</h3>
-      </div>
-    );
-  }
-
   // static data including charts and forms for user to enter new budgets and query data
   return (
     <div>
