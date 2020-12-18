@@ -7,7 +7,7 @@ require('dotenv').config();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 const app = express();
 
 app.use((req, res, next) => {
