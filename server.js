@@ -1,7 +1,8 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-require('dotenv').config();
+const path = require("path");
+require("dotenv").config();
 
 // bcrypt setup for password salt/hashing
 const bcrypt = require("bcrypt");
@@ -18,8 +19,12 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('build'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
 }
 
 // JWT setup
@@ -106,15 +111,15 @@ app.post("/api/signup", async (req, res) => {
           return res.status(401).json({
             success: false,
             err: error,
-            msg: "Your account could not be created."
-          })
-        };
+            msg: "Your account could not be created.",
+          });
+        }
         // if no error, use status code 201 to indicate account created
         return res.status(201).json({
           results: results,
-          success:true,
+          success: true,
           err: null,
-          msg: "Successfully created your account!"
+          msg: "Successfully created your account!",
         });
       }
     );
@@ -143,33 +148,37 @@ app.post("/api/login", async (req, res) => {
       } else {
         // otherwise, compare entered password to encrypted password in database
         console.log(`Results: ${results[0].password}`);
-        bcrypt.compare(password, results[0].password, function (err, bcryptRes) {
-          // if successful match made, create a token
-          if (bcryptRes) {
-            let token = jwt.sign(
-              { id: results[0].id, email: results[0].email },
-              secretKey,
-              {
-                expiresIn: "7d",
-              }
-            );
-            // return token in response with status 201 to indicate successful entry
-            return res.status(201).json({
-              results: results,
-              success: true,
-              err: null,
-              token,
-              msg: "Successfully logged in!"
-            });
-          } else {
-            // otherwise, send 401 error code and appropriate message
-            return res.status(401).json({
-              success: false,
-              token: null,
-              msg: "Username or password is incorrect",
-            });
+        bcrypt.compare(
+          password,
+          results[0].password,
+          function (err, bcryptRes) {
+            // if successful match made, create a token
+            if (bcryptRes) {
+              let token = jwt.sign(
+                { id: results[0].id, email: results[0].email },
+                secretKey,
+                {
+                  expiresIn: "7d",
+                }
+              );
+              // return token in response with status 201 to indicate successful entry
+              return res.status(201).json({
+                results: results,
+                success: true,
+                err: null,
+                token,
+                msg: "Successfully logged in!",
+              });
+            } else {
+              // otherwise, send 401 error code and appropriate message
+              return res.status(401).json({
+                success: false,
+                token: null,
+                msg: "Username or password is incorrect",
+              });
+            }
           }
-        });
+        );
       }
     }
   );
