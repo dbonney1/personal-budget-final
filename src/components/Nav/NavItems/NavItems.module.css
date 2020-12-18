@@ -1,0 +1,19 @@
+.NavItems {
+    position: fixed;
+    background-color: #282c34;
+    z-index: 100;
+    height: 10%;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+@media (min-width: 500px) {
+    .NavItems {
+        flex-flow: row;
+    }
+}

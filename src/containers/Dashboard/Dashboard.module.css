@@ -1,0 +1,71 @@
+.Dashboard, .Heading, .Charts, .Message {
+    color: white;
+}
+
+.Pie {
+  display: inline-block;
+  margin: 50px 100px;
+}
+
+.InputBox, .NewInputBox {
+  width: 50%;
+  min-width: 250px;
+  margin: 0 auto 30px 20px;
+  padding: 14px 0 18px 0;
+  height: 30px;
+  border: 3px solid black;
+  border-radius: 2px;
+  font-size: 18pt;
+}
+
+.NewInputBox {
+    display: block;
+}
+
+.InputButton, .InputButtonBlock {
+    vertical-align: top;
+    cursor: pointer;
+    font-size: 14pt;
+    padding: 20px;
+    background-color: plum;
+    border: 2px solid red;
+}
+
+.InputButtonBlock {
+    display: inline-block;
+}
+.NewBudgetWrapper, .BudgetWrapper, .SketchWrapper, .Dashboard, .Charts {
+    display: inline-block;
+}
+.NewBudgetWrapper {
+    width: 40%;
+    position: relative;
+}
+
+.Dashboard, .Charts {
+    width: 50%;
+    max-height: 700px;
+    vertical-align: top;
+}
+
+.LargeChart {
+    position: relative;
+    top: -100px;
+}
+.MonthSelection {
+    display: inline-block;
+    padding: 10px 40px;
+    margin: 30px;
+}
+.MonthSelectionBlock {
+    display: block;
+    padding: 10px 48px;
+}
+.AmountBox {
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+}
+.BoxName {
+    display: inline-block;
+}

@@ -1,0 +1,35 @@
+.Hero {
+    display: block;
+    top: 100px;
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+}
+
+.Label {
+    color: white;
+    text-shadow: 2px 2px #302e38;
+    position: relative;
+    text-align: center;
+    top: 10%;
+    width: 100%;
+}
+.Label h1 {
+    font-size: 40pt;
+    position: relative;
+    top: -200px;
+}
+.Label h2 {
+    font-size: 20pt;
+    position: relative; 
+    top: -50px;
+}
+.Particles {
+    display: block;
+    width: inherit;
+    height: fit-content;
+    background-color: #7b0aaf;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
