@@ -29,7 +29,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
+    "begin": "npm run build && node server.js",
+    "start": "node server.js",
+    "start:orig": "react-scripts --max_old_space_size=4096 start",
     "build": "react-scripts --max_old_space_size=4096 build",
     "heroku-postbuild": "npm install && npm run build",
     "test": "react-scripts test",
