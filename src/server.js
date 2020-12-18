@@ -18,6 +18,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+}
+
 // JWT setup
 const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
