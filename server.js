@@ -12,8 +12,8 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-  res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
   next();
 });
 
@@ -21,10 +21,6 @@ app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("build"));
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "build", "index.html"));
-  });
 }
 
 // JWT setup
@@ -55,7 +51,7 @@ app.get("/api/budget/:id", jwtMW, async (req, res) => {
     function (error, results, fields) {
       if (error) throw error;
       console.log(results);
-      res.json(results);
+      return res.json(results);
     }
   );
 });
@@ -183,6 +179,13 @@ app.post("/api/login", async (req, res) => {
     }
   );
 });
+
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+}
 
 // serve on port
 app.listen(port, () => {

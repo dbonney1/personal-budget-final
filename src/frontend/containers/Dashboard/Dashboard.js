@@ -19,7 +19,6 @@ const Dashboard = () => {
   const [month, setMonth] = useState("January");
   const [monthViewing, setMonthViewing] = useState("January");
   const [actualSpent, setActualSpent] = useState([]);
-  const [user_FK, setUser_FK] = useState("");
   const [charts, setCharts] = useState([]);
   const [chartBudgets, setChartBudgets] = useState([]);
   const [line, setLine] = useState([]);
@@ -39,6 +38,8 @@ const Dashboard = () => {
       .get(`/api/budget/${userEmail}`, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
       })
       .then((res) => {
@@ -58,6 +59,8 @@ const Dashboard = () => {
       .get(`/api/budget/${userEmail}`, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
       })
       .then((res) => {
