@@ -83,8 +83,7 @@ const Dashboard = () => {
     if (
       title.length === 0 ||
       budget.length === 0 ||
-      tags.length === 0 ||
-      typeof budget !== "number"
+      tags.length === 0
     )
       return;
 
@@ -163,7 +162,7 @@ const Dashboard = () => {
     // find the item's index in newActualSpent and change its amount
     const changedIndex = newActualSpent.findIndex((spent) => spent.id === id);
     newActualSpent[changedIndex].amount = amount;
-
+    console.log(amount);
     // set actualSpent to newActualSpent
     setActualSpent(newActualSpent);
   };
@@ -191,7 +190,8 @@ const Dashboard = () => {
 
     // cycle through each month, comparing to each budget and finding matching sets
     for (let month of months) {
-      userBudgets = budgets.slice().filter((budget) => {
+      userBudgets = Array.from(budgets.slice());
+      userBudgets = userBudgets.filter((budget) => {
         return budget.month === month;
       });
       // if no matches found, simply push a budget of 0 to the userBudgets array and skip to next cycle
@@ -232,7 +232,8 @@ const Dashboard = () => {
 
     // cycle through each month and create matching sets
     for (let month of months) {
-      userBudgets = budgets.slice().filter((budget) => {
+      userBudgets = Array.from(budgets.slice());
+      userBudgets = userBudgets.filter((budget) => {
         return budget.month === month;
       });
       // if no matches, simply push amount of 0 to array and skip to next iteration
@@ -255,7 +256,8 @@ const Dashboard = () => {
     let expectedAmountSpent = 0;
 
     // filter budgets to include only entries containing a given item
-    userBudgets = budgets.slice().filter((budget) => {
+    userBudgets = Array.from(budgets.slice());
+    userBudgets = userBudgets.filter((budget) => {
       return budget.title === item;
     });
 
@@ -278,7 +280,8 @@ const Dashboard = () => {
     let actualAmountSpent = 0;
 
     // filter budgets to include only entries containing a given item
-    userBudgets = budgets.slice().filter((budget) => {
+    userBudgets = Array.from(budgets.slice());
+    userBudgets = userBudgets.filter((budget) => {
       return budget.title === item;
     });
 
@@ -457,7 +460,8 @@ const Dashboard = () => {
 
     // create an array of budgets associated with each month
 
-    monthBudget = budgets.slice().filter((budget) => {
+    monthBudget = Array.from(budgets.slice());
+    monthBudget = monthBudget.filter((budget) => {
       return budget.month === month;
     });
 
@@ -512,11 +516,16 @@ const Dashboard = () => {
             submitValue="Submit Actual Expenses"
           >
             {month.forEach((monthlyBudget) => {
+              console.log('Monthly budget', monthlyBudget);
+              const id = monthlyBudget.id;
               const actualSpentDetails = {
-                id: monthlyBudget.id,
+                id: id,
                 amount: monthlyBudget.actualSpent,
               };
 
+              console.log(id);
+              console.log('details', actualSpentDetails);
+              
               newActualSpent.push(actualSpentDetails);
               setActualSpent([newActualSpent]);
 
