@@ -111,7 +111,7 @@ const Dashboard = () => {
         console.log("Inserted one budget");
 
         // if successful, modify budgets to include new data and rebuild charts
-        const newBudgets = budgets.slice();
+        const newBudgets = Array.from(budgets.slice());
         newBudgets.push(budgetData);
 
         setBudgets([...newBudgets]);
@@ -158,7 +158,7 @@ const Dashboard = () => {
 
   // handler for changing actual expense values
   const handleActualSpent = (id, amount, actualSpentVals) => {
-    const newActualSpent = actualSpentVals.slice();
+    const newActualSpent = Array.from(actualSpentVals.slice());
     // find the item's index in newActualSpent and change its amount
     const changedIndex = newActualSpent.findIndex((spent) => spent.id === id);
     newActualSpent[changedIndex].amount = amount;
@@ -525,7 +525,7 @@ const Dashboard = () => {
 
               console.log(id);
               console.log('details', actualSpentDetails);
-              
+
               newActualSpent.push(actualSpentDetails);
               setActualSpent([newActualSpent]);
 
